@@ -10,6 +10,15 @@ const HIGHSCORE_FILE = path.join(__dirname, 'highscores.json');
 
 app.use(bodyParser.json());
 
+// Lägg till Content-Security-Policy middleware direkt efter bodyParser:
+app.use(function (req, res, next) {
+    res.setHeader("Content-Security-Policy", "default-src 'self' http://localhost:3000; img-src 'self'");
+    return next();
+});
+
+// Hantera favicon.ico
+app.get('/favicon.ico', (req, res) => res.status(204).send());
+
 // Endpoint för att hämta highscores
 app.get('/highscores', (req, res) => {
     if (fs.existsSync(HIGHSCORE_FILE)) {
