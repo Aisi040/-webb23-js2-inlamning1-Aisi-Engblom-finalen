@@ -1,0 +1,1 @@
+{"version":3,"sources":["css/style.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA","file":"style.78032849.css","sourceRoot":"..","sourcesContent":["body {\r\n    font-family: Arial, sans-serif;\r\n    text-align: center;\r\n    padding: 2em;\r\n}\r\n\r\nbutton {\r\n    padding: 10px 20px;\r\n    margin: 10px;\r\n}\r\n\r\n"]}
