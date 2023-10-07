@@ -10,13 +10,13 @@ const HIGHSCORE_FILE = path.join(__dirname, 'highscores.json');
 
 app.use(bodyParser.json());
 
-// Lägg till Content-Security-Policy middleware direkt efter bodyParser:
+// Lägg till Content Security Policy (CSP) middleware
 app.use(function (req, res, next) {
-    res.setHeader("Content-Security-Policy", "default-src 'self' http://localhost:3000; img-src 'self'");
+    res.setHeader("Content-Security-Policy", "default-src 'self' http://localhost:3000; img-src 'self' http://localhost:3000");
     return next();
 });
 
-// Hantera favicon.ico
+// Endpoint för att hantera favicon.ico
 app.get('/favicon.ico', (req, res) => res.status(204).send());
 
 // Endpoint för att hämta highscores
@@ -37,7 +37,7 @@ app.post('/highscores', (req, res) => {
     };
 
     let highscores = [];
-    
+
     if (fs.existsSync(HIGHSCORE_FILE)) {
         highscores = JSON.parse(fs.readFileSync(HIGHSCORE_FILE, 'utf8'));
     }
@@ -48,9 +48,7 @@ app.post('/highscores', (req, res) => {
     highscores.sort((a, b) => b.score - a.score);
 
     // Behåll endast topp 5 highscores
-    if (highscores.length > 5) {
-        highscores.length = 5;
-    }
+    highscores = highscores.slice(0, 5);
 
     fs.writeFileSync(HIGHSCORE_FILE, JSON.stringify(highscores, null, 2), 'utf8');
     res.json({ status: "success" });

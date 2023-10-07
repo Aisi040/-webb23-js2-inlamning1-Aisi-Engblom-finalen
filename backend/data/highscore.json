@@ -1,0 +1,11 @@
+[
+    {
+        "name": "Alice",
+        "score": 100
+    },
+    {
+        "name": "Bob",
+        "score": 90
+    },
+    ... (upp till 5 objekt)
+]
